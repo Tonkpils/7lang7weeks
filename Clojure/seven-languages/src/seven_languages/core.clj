@@ -1,6 +1,7 @@
 (ns seven-languages.core)
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+
+(defn big
+	"Returns true if a string st is longer than n characters"
+	[st n]
+	(> (count st) n))

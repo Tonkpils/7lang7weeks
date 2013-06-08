@@ -2,6 +2,17 @@
   (:require [clojure.test :refer :all]
             [seven-languages.core :refer :all]))
 
+(def st "Hello")
+
 (deftest a-test
   (testing "1 equals 1"
     (is (= 1 1))))
+
+(deftest big-test
+	(testing "big string is greater than n returns true"
+		(is (= true (big st (- (count st) 1)))))
+	(testing "big string is less than n returns false"
+		(is (= false (big st (+ (count st) 1)))))
+	(testing "big string is equal to n returns false"
+		(is (= false (big st (count st))))))
+  

@@ -16,3 +16,10 @@
 	(testing "big string is equal to n returns false"
 		(is (= false (big st (count st))))))
   
+(deftest collection-type-test
+	(testing "col is a list"
+		(is (= :list (collection-type '(1 2 3)))))
+	(testing "col is a vector"
+		(is (= :vector (collection-type [:hutt :wookie :ewok]))))
+	(testing "col is a map"
+		(is (= :map (collection-type {:hello "I'm a map"})))))

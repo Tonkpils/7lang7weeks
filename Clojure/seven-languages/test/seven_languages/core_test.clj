@@ -23,3 +23,11 @@
 		(is (= :vector (collection-type [:hutt :wookie :ewok]))))
 	(testing "col is a map"
 		(is (= :map (collection-type {:hello "I'm a map"})))))
+
+(deftest unless-test
+	(testing "unless else with else"
+		(is (= :hello (unless true :alpaca :hello))))
+	(testing "unless else with no else"
+		(is (= nil (unless true :alpaca))))
+	(testing "unless body executed with no else"
+		(is (= :alpaca (unless false :alpaca)))))

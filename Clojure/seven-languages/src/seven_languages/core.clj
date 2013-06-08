@@ -13,3 +13,7 @@
 		(map? col) :map
 		(vector? col) :vector
 		(list? col) :list))
+
+(defmacro unless 
+	[condition body & [else]]
+	(list 'if (list 'not condition) body else))

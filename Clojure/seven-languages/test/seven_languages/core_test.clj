@@ -31,3 +31,14 @@
 		(is (= nil (unless true :alpaca))))
 	(testing "unless body executed with no else"
 		(is (= :alpaca (unless false :alpaca)))))
+
+(def leo (new-user "Leo"))
+
+(deftest type-test
+	(testing "protocol 'say'"
+		(is (= st (say leo st))))
+	(testing "protocol 'fall_asleep'"
+		(is (= "ZzZzZz...." (fall_asleep leo))))
+	(testing "protocol 'eat'"
+		(is (= "I love ice-cream" (eat leo "ice-cream")))))
+	

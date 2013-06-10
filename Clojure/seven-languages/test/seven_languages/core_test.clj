@@ -41,4 +41,13 @@
 		(is (= "ZzZzZz...." (fall_asleep leo))))
 	(testing "protocol 'eat'"
 		(is (= "I love ice-cream" (eat leo "ice-cream")))))
+
+(deftest account-test
+	(dosync (alter accounts conj {:account "1", :balance 100} {:account "2", :balance 200}))	
+	(testing "credits"
+		(dosync (alter accounts credit "1" 100))
+		(is (= 200 ((first @accounts) :balance))))
+	(testing "debits"
+		(dosync (alter accounts debit "2" 100))
+		(is (= 100 ((nth @accounts 1) :balance)))))
 	

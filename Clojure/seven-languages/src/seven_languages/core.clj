@@ -30,3 +30,25 @@
 (defmacro unless 
 	[condition body & [else]]
 	(list 'if (list 'not condition) body else))
+
+(def accounts (ref []))
+
+(defn calculate_amount [accounts account_number amount] 
+	(map
+		(fn [account] 
+			(if (= account_number (:account account))
+					(assoc account :balance (+ (:balance account) amount))
+					account
+			)
+		)
+		accounts
+	)	
+)
+
+(defn credit [accounts account_number amount]
+	(calculate_amount accounts account_number amount)
+)
+
+(defn debit [accounts account_number amount]
+	(calculate_amount accounts account_number (- amount))
+)

@@ -41,3 +41,18 @@ assert(not is_prime(0))
 assert(not is_prime(1))
 assert(not is_prime(10))
 
+function first_prime_numbers_ending_in_3(num)
+  if num > 1 then
+    print(3)
+  end
+  local n = 4
+  while num >= 2 do
+    if ends_in_3(n) and is_prime(n) then
+      print(n)
+      num = num - 1
+    end
+    n = n + 1
+  end
+end
+
+first_prime_numbers_ending_in_3(100)

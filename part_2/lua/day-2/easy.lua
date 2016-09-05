@@ -21,3 +21,23 @@ for i = 1, #expected do
   assert(expected[i] == actual[i])
 end
 
+local _private = {}
+
+function strict_write(table, key, value)
+  if _private[key] and value ~= nil then
+    error("Duplicate key: " .. key)
+  else
+    _private[key] = value
+  end
+end
+
+local mt = {
+  __newindex = strict_write
+}
+
+local st = {}
+setmetatable(st, mt)
+
+st.gold = 50
+st.gold = nil
+assert(st.gold == nil)

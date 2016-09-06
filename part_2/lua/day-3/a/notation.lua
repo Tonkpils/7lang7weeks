@@ -57,7 +57,37 @@ local function parse_note(s)
   }
 end
 
+local function part(t)
+  local function play_part()
+    for i = 1, #t do
+      play(t[i].note, t[i].duration)
+    end
+  end
+
+  scheduler.schedule(0.0, coroutine.create(play_part))
+end
+
+local mt = {
+  __index = function(t, s)
+    local result = parse_note(s)
+    return result or rawget(t, s)
+  end
+}
+
+setmetatable(_G, mt)
+
+local function set_tempo(bpm)
+  tempo = bpm
+end
+
+local function go()
+  scheduler.run()
+end
+
 return {
   parse_note = parse_note,
-  play = play
+  play = play,
+  part = part,
+  set_tempo = set_tempo,
+  go = go
 }

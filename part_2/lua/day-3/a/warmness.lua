@@ -1,5 +1,3 @@
-song = require 'notation'
-
 song.set_tempo(116)
 
 song.part {
@@ -30,5 +28,3 @@ song.part {
 song.part {
   E1h
 }
-
-song.go()

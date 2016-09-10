@@ -35,7 +35,15 @@ int main(int argc, const char* argv[])
 
   lua_pushcfunction(L, midi_send);
   lua_setglobal(L, "midi_send");
-  luaL_dofile(L, argv[1]);
+  luaL_dostring(L, "song = require 'notation'");
+
+  int result = luaL_dofile(L, argv[1]);
+
+  if (result != 0) {
+    std::cerr << lua_tostring(L, -1) << std::endl;
+  } else {
+    luaL_dostring(L, "song.go()");
+  }
 
   lua_close(L);
   return 0;

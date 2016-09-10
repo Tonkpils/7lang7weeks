@@ -1,7 +1,7 @@
 song.set_tempo(50)
 
 song.part {
-  D3s, Fs3s, A3s, D4s,
+  D3sL, Fs3sL, A3sL, D4sL,
   A2s, Cs3s, E3s, A3s,
   B2s, D3s, Fs3s, B3s,
   Fs2s, A2s, Cs3s, Fs3s,
@@ -9,7 +9,7 @@ song.part {
   G2s, B2s, D3s, G3s,
   D2s, Fs2s, A2s, D3s,
   G2s, B2s, D3s, G3s,
-  A2s, Cs3s, E3s, A3s
+  A2sQ, Cs3sQ, E3sQ, A3sQ
 }
 
 song.part {

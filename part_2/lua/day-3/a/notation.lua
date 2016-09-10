@@ -2,12 +2,20 @@ local scheduler = require 'scheduler'
 
 local NOTE_DOWN = 0x90
 local NOTE_UP = 0x80
-local VELOCITY = 0x7f
 
-local function play(note, duration)
-  midi_send(NOTE_DOWN, note, VELOCITY)
+local function play(note, duration, volume)
+  midi_send(NOTE_DOWN, note, volume)
   scheduler.wait(duration)
-  midi_send(NOTE_UP, note, VELOCITY)
+  midi_send(NOTE_UP, note, volume)
+end
+
+local function volume(velocity)
+  local volume = {
+    L = 0x7f,
+    Q = 0x40,
+  }
+
+  return volume[velocity] or 0x60
 end
 
 local function note(letter, octave)
@@ -46,21 +54,22 @@ end
 
 
 local function parse_note(s)
-  local letter, octave, value = string.match(s, "([A-Gs]+)(%d+)(%a+)")
+  local letter, octave, value, velocity = string.match(s, "([A-Gs]+)(%d+)(%l+)(%u?)")
   if not (letter and octave and value) then
     return nil
   end
 
   return {
     note = note(letter, octave),
-    duration = duration(value)
+    duration = duration(value),
+    volume = volume(velocity)
   }
 end
 
 local function part(t)
   local function play_part()
     for i = 1, #t do
-      play(t[i].note, t[i].duration)
+      play(t[i].note, t[i].duration, t[i].volume)
     end
   end
 
